@@ -1,4 +1,4 @@
-/*This package contains the XML String parsing. 
+/*This package contains the  parsing of XML String implementation. 
  */
 
 package com.xmlStringparsing.org;
@@ -18,7 +18,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- * This class implements the parsing of XML String and read the value of each
+ * This class implements the parsing of XML String and reads the value of each
  * element.
  * 
  * @author ravi ranjan kumar
@@ -29,12 +29,12 @@ import org.xml.sax.SAXException;
 public class XmlStringParser {
 
 	/**
-	 * This is main method which is responsible to all operation to parse an XML
-	 * string. this XML String is not parsed from any file in fact it is just a
-	 * string written in XML ways.
+	 * This is main method which is responsible to perform all kind of operation
+	 * to parse an XML string. this XML String is not being parsed from any
+	 * file. in fact it is just a string written in XML ways.
 	 * 
 	 * @param args
-	 *            reads input.
+	 *            reads command line input.
 	 */
 	public static void main(String[] args) {
 
@@ -45,7 +45,10 @@ public class XmlStringParser {
 		// creating document factory instance.
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
-			// instance of new document builder which builds a document.
+			/*
+			 * instance of new document builder which builds a document for any
+			 * file or string.
+			 */
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			// instance of input source.
 			InputSource iSource = new InputSource();
@@ -53,21 +56,25 @@ public class XmlStringParser {
 			// parsing the XML string.
 			Document doc = builder.parse(iSource);
 			/*
-			 * getting the all kind of node( Like : parent node, child node,
-			 * sibling node e.t.c) associated of which XML element name we use.
+			 * getting all kind of node( Like : parent node, child node, sibling
+			 * node e.t.c) associated of which XML element we choose.
 			 */
 			NodeList xmlTagName = doc.getElementsByTagName("sessionid");
 			// iterating through each node of chosen XML Element.
 			for (int i = 0; i < xmlTagName.getLength(); i++) {
-				// retrieving each associated to the Element which we've chosen.
+				// retrieving each associated Element which we've chosen.
 				Node tagName = xmlTagName.item(i);
 				// checking whether the present node is an Element or not.
 				if (tagName.getNodeType() == Node.ELEMENT_NODE) {
-					// getting the exactly element of that selected node in
-					// nodeList.
+					/*
+					 * getting the exactly element of that selected node in the
+					 * nodeList.
+					 */
 					Element element = (Element) tagName;
-					// printing the XML element tag name as well as it's
-					// corresponding values.
+					/*
+					 * printing the XML element tag name as well as it's
+					 * corresponding values.
+					 */
 					System.out.println(element.getTagName() + ":" + element.getTextContent());
 				}
 			}
