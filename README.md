@@ -82,13 +82,13 @@ evaluate(String expression, InputSource source)
 Evaluate an XPath expression in the context of the specified InputSource and return the result as a String.
 
 to fetch attribute value use the below syntax: 
-xPath.compile("./@{attribute name}").evaluate(NodeList_instance_name.item(i)))
+# xPath.compile("./@{attribute name}").evaluate(NodeList_instance_name.item(i)))
 
 evaluate(String expression, InputSource source)
 Evaluate an XPath expression in the context of the specified InputSource and return the result as a String.
 
 to fetch it's child node value use the below syntax:
-xPath.compile("./{child tag name}").evaluate(NodeList_instance_name.item(i)))
+# xPath.compile("./{child tag name}").evaluate(NodeList_instance_name.item(i)))
 
 Basically use ./@ to fetch attribute value and use only ./ to fetch it's child node value.
 
