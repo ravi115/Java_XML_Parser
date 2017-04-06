@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+	<student id="1">
+		<name>Ravi Ranjan Kumar</name>
+		<usn>1RN12CS078</usn>
+		<college>RNSIT</college>
+	</student>
+	<student id="2">
+		<name>Monu Sharma</name>
+		<usn>1JB12CS077</usn>
+		<college>SJBIT</college>
+	</student>
+</students>
