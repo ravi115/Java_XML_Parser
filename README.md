@@ -1,12 +1,17 @@
 # Java_XML_Parser
 In this repository, I'll be parsing XML  file as well as XML string to read it's attribute, value and tag name.
+
+Two ways to parse XML String.
+1 . Normal way using NodeList and Node and Then Element.
+2 . XPath (easiest way of parsing). 
+
 These are the below steps which tell us how to parse the XML string.
 
 first of all we have to create an instance of 
 # DocumentBuilderFactory class.
-# this DocumentBuilderFactory - Defines a factory API that enables applications to obtain a parser that produces DOM object trees from XML documents.
+this DocumentBuilderFactory - Defines a factory API that enables applications to obtain a parser that produces DOM object trees from XML documents.
 # DocumentBuilderFactory() : 
-# Protected constructor to prevent instantiation.
+Protected constructor to prevent instantiation.
 #see the syntax : 
 
 # DocumentBuilderFactory instance_variable_name = DocumentBuilderFactory.newInstance();  
@@ -18,7 +23,6 @@ Use the properties file "lib/jaxp.properties" in the JRE directory. This configu
 Use the Services API (as detailed in the JAR specification), if available, to determine the classname. The Services API will look for a classname in the file META-INF/services/javax.xml.parsers.DocumentBuilderFactory in jars available to the runtime.
 Platform default DocumentBuilderFactory instance.
 Once an application has obtained a reference to a DocumentBuilderFactory it can use the factory to configure and obtain parser instances.
-
 
 then create a 
 # DocumentBuilder instance using the instance of DocumentBuilderFactory class only.
@@ -62,4 +66,30 @@ NodeList xmlTagList = doc.getElementsByTagName("any Tag from xml");
 
 then we Node to get a single node from NodeList and checks whether that node is Element or not. if it is an element the get 
 all it's child node tag name as well as value.
+
+# XPath
+An XPath object is not thread-safe and not reentrant. In other words, it is the application's responsibility to make sure that one XPath object is not used from more than one thread at any given time, and while the evaluate method is invoked, applications may not recursively call the evaluate method.
+
+we have to create an Xpath instance.
+#see the syntax : -
+# XPath xPath = XPathFactory.newInstance().newXPath();
+this will create a new instance of XPath.
+
+compile(String expression)
+Compile an XPath expression for later evaluation.
+
+evaluate(String expression, InputSource source)
+Evaluate an XPath expression in the context of the specified InputSource and return the result as a String.
+
+to fetch attribute value use the below syntax: 
+xPath.compile("./@{attribute name}").evaluate(NodeList_instance_name.item(i)))
+
+evaluate(String expression, InputSource source)
+Evaluate an XPath expression in the context of the specified InputSource and return the result as a String.
+
+to fetch it's child node value use the below syntax:
+xPath.compile("./{child tag name}").evaluate(NodeList_instance_name.item(i)))
+
+Basically use ./@ to fetch attribute value and use only ./ to fetch it's child node value.
+
 --------------------------*****------------------------------------------
