@@ -29,7 +29,7 @@ import org.xml.sax.SAXException;
 public class XmlStringParser {
 
 	/**
-	 * 
+	 * This method will parse an XML from XML File.
 	 */
 	private static void parseXMLStringFromFile() {
 		// creating document factory instance.
@@ -101,7 +101,7 @@ public class XmlStringParser {
 	}
 
 	/**
-	 * 
+	 * This method will parse an XML from XML String.
 	 */
 	private static void parseXMLString() {
 		// XML string.
