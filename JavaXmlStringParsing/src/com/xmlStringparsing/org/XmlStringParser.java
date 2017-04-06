@@ -9,6 +9,10 @@ import java.io.StringReader;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -27,6 +31,60 @@ import org.xml.sax.SAXException;
  *
  */
 public class XmlStringParser {
+
+	/**
+	 * This method parse the XML file using XPath.
+	 */
+	private static void parseXMLUsingXPath() {
+
+		// creating document factory instance.
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		try {
+			/*
+			 * instance of new document builder which builds a document for any
+			 * file or string.
+			 */
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			// parsing the XML string from a given file.
+			Document document = builder.parse("product.xml");
+			// creating an instance of new XPath.
+			XPath xPath = XPathFactory.newInstance().newXPath();
+			// create retrieve all Elements of XML in NodeList.
+			NodeList tagNameList = (NodeList) xPath.compile("//product").evaluate(document, XPathConstants.NODESET);
+			/*
+			 * prints the total number of node (say element or tag ) product
+			 * which is retrieved in the nodeList, present in XML document.
+			 */
+			System.out.println("Total number of products is : " + tagNameList.getLength());
+			System.out.println("===========:Now List out all products information : =========");
+			// iterating through each node (say element or tag ) in NodeList
+			for (int i = 0; i < tagNameList.getLength(); i++) {
+				// get the all attribute id of product.
+				/*
+				 * to fetch attribute of any tag we use @{attribute name} before
+				 * attribute name, but to fetch the value of it's child node we
+				 * just use (./{child tag name})
+				 */
+				System.out.println(
+						"the attribute Id of tag Product is : " + xPath.compile("./@id").evaluate(tagNameList.item(i)));
+				// get the value of all name tag value.
+				System.out.println("the name is : " + xPath.compile("./name").evaluate(tagNameList.item(i)));
+				// get the value of all price tag value.
+				System.out.println("the price is : " + xPath.compile("./price").evaluate(tagNameList.item(i)));
+			}
+		}
+
+		catch (ParserConfigurationException e) {
+			System.out.println(e.getMessage());
+		} catch (SAXException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} catch (XPathExpressionException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
 
 	/**
 	 * This method will parse an XML from XML File.
@@ -164,11 +222,17 @@ public class XmlStringParser {
 	 */
 	public static void main(String[] args) {
 
+		// First method to parse XML String.
 		// parse an XML string.
 		parseXMLString();
 
+		// Second way of parsing XML String.
 		// parse an XML string from file.
 		parseXMLStringFromFile();
+
+		// Third and easiest way of parsing XML file/ XML String.
+		// parse an XML using XPath.
+		parseXMLUsingXPath();
 	}
 
 }
